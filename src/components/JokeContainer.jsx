@@ -3,9 +3,10 @@ import axios from "axios";
 
 
 const JokeContainer = () => {
-    const [joke, setJoke] = useState(null)
+    const [joke, setJoke] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
 
-/*     useEffect(() => {
+    useEffect(() => {
             const getJoke = async () => {
 
                 const options = {
@@ -20,16 +21,19 @@ const JokeContainer = () => {
                 try {
                     const response = await axios.request(options);
                     setJoke(response.data.body[0])
-                    console.log(response.data);
                 } catch (error) {
+                    setInterval(() => {
+                        setErrorMsg(error.message)
+                    }, 5000)
+                    setErrorMsg("")
                     console.error(error);
                 }
             }
             getJoke();
-    }, []) */
+    }, [])
 
 
-/*     const handleGetRandomJoke = async () => {
+    const handleGetRandomJoke = async () => {
         const options = {
           method: 'GET',
           url: 'https://dad-jokes.p.rapidapi.com/random/joke',
@@ -41,14 +45,16 @@ const JokeContainer = () => {
         
         try {
             const response = await axios.request(options);
-            const obj = response.data.body[0];
-            setJoke(obj)
-            console.log(response.data);
+            setJoke(response.data.body[0])
         } catch (error) {
+            setInterval(() => {
+                setErrorMsg(error.message)
+            }, 5000)
+            setErrorMsg("")
             console.error(error);
         }
 
-    } */
+    }
 
 
 
@@ -68,8 +74,9 @@ const JokeContainer = () => {
                     )}
 
                 </div>
+                <p className="font-onest text-[2px] text-red-500">{errorMsg}</p>
                 <button className="bg-purple-500 text-white font-semibold font-onest text-sm px-6 py-3 rounded-lg" 
-                /* onClick={handleGetRandomJoke} */>Generate Joke</button>
+                onClick={handleGetRandomJoke}>Generate Joke</button>
             </div>
         </div>
     </section>
