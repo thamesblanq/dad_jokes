@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
+const baseUrl = 'https://jokes-api-0a9p.onrender.com/joke';
 
 
 const JokeContainer = () => {
@@ -9,11 +10,14 @@ const JokeContainer = () => {
     useEffect(() => {
             const getJoke = async () => {
 
+                const apiKey = (await axios.get(baseUrl)).data.message;
+
+
                 const options = {
                   method: 'GET',
                   url: 'https://dad-jokes.p.rapidapi.com/random/joke',
                   headers: {
-                    'X-RapidAPI-Key': '8674c8ace0msh64d268db9399829p1fcde0jsn3f915e9c28d6',
+                    'X-RapidAPI-Key': apiKey,
                     'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com'
                   }
                 };
@@ -34,11 +38,13 @@ const JokeContainer = () => {
 
 
     const handleGetRandomJoke = async () => {
+
+        const apiKey = (await axios.get(baseUrl)).data.message;
         const options = {
           method: 'GET',
           url: 'https://dad-jokes.p.rapidapi.com/random/joke',
           headers: {
-            'X-RapidAPI-Key': '8674c8ace0msh64d268db9399829p1fcde0jsn3f915e9c28d6',
+            'X-RapidAPI-Key': apiKey,
             'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com'
           }
         };
