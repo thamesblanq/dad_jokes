@@ -10,21 +10,10 @@ const JokeContainer = () => {
 
     const handleGetRandomJoke = async () => {
         setLoading(true)
-
-        const apiKey = (await axios.get(baseUrl)).data.message;
-        const options = {
-          method: 'GET',
-          url: 'https://dad-jokes.p.rapidapi.com/random/joke',
-          headers: {
-            'X-RapidAPI-Key': apiKey,
-            'X-RapidAPI-Host': 'dad-jokes.p.rapidapi.com'
-          }
-        };
-        
         try {
             setLoading(false);
-            const response = await axios.request(options);
-            setJoke(response.data.body[0])
+            const res = await axios.get(baseUrl)
+            setJoke(res)
         } catch (error) {
             setErrorMsg(error.message)
             setLoading(false)
@@ -37,11 +26,6 @@ const JokeContainer = () => {
         }
 
     }
-
-
-
-
-
 
   return (
     <section className="flex items-center justify-center pt-20">
